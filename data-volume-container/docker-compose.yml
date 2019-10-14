@@ -1,0 +1,24 @@
+# versionを3にする
+version: '2'
+services:
+  volume-container:
+    container_name: volume-container
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+
+  mysql:
+    image: mysql:5.7
+    # version3ではvolumes_fromに対応していないみたいなので、何を使ったらいいのか調べる
+    volumes_from:
+      - volume-container
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    ports:
+    - 3306:3306
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_DATABASE=volume_test
+      - MYSQL_USER=example
+      - MYSQL_PASSWORD=yes
+    depends_on:
+      - volume-container
