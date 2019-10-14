@@ -1,0 +1,3 @@
+docker image build -t example/echo:latest .
+docker container run -p <host port>:8080
+docker container stop $(docker container ls --filter "ancestor=example/echo" -q)
