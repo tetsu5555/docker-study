@@ -1,0 +1,15 @@
+version: "3"
+services:
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    # pidをhostと共有する
+    pid: "host"
+  sidecar:
+    image: brendanburns/topz:db0fa58
+    ports:
+      - "8081:8080"
+    command: /server -addr=0.0.0.0:8080
+    # pidをhostと共有する
+    pid: "host"

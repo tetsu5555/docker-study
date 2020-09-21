@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    # redis　serverを立ち上げる
+    command: redis-server --appendonly yes
+    volumes:
+       - ./data/redis:/data

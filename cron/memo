@@ -1,0 +1,3 @@
+docker build --name cron-test .
+docker run --name cron-test-con -d cron-test
+docker exec -it <container id> bash
